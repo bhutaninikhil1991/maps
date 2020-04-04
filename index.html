@@ -27,8 +27,8 @@
     <svg id="legend-svg" style="position: absolute;"></svg>
 
     <figcaption>
-      Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/data">SF 311 Cases</a> (<a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h">Neighborhoods</a>, <a
-        href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Streets-Active-and-Retired/3psu-pn9h">Streets</a>)
+      Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/data" target="_blank">SF 311 Cases</a> (<a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h" target="_blank">Neighborhoods</a>, <a
+        href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Streets-Active-and-Retired/3psu-pn9h" target="_blank">Streets</a>)
     </figcaption>
   </figure>
 
@@ -75,7 +75,8 @@
     };
 
 
-    svg.call(d3.zoom().on("zoom", function() {
+    svg.call(d3.zoom().extent([[0, 0], [960, 600]])
+      .scaleExtent([1, 8]).on("zoom", function() {
       svg.attr("transform", d3.event.transform)
     }))
 
@@ -313,6 +314,10 @@
         .attr("height", 18)
         .style("fill", function(d) {
           return color(d);
+        }).on("click", function(d) {
+          filtersource(d);
+          const legendCell = d3.select(this);
+          legendCell.classed('hidden', !legendCell.classed('hidden')); // toggle opacity of legend item
         });
 
     })
@@ -325,6 +330,16 @@
       .attr("dy", ".15em")
       .style("font-size", 14)
       .text("Source");
+
+    function filtersource(c) {
+      //let c = d3.select(this).text();
+      d3.selectAll("#vis circle")
+        .filter(function(d) {
+          return d.source != c;
+        }).classed('hidden', function() { // toggle "hidden" class
+          return !d3.select(this).classed('hidden');
+        });
+    }
 
     function source(json) {
       let out = [];

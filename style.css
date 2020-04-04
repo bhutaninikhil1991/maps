@@ -1,5 +1,5 @@
 body {
-  background-color: white;
+  background-color: bisque;
   text-align: center;
 
   font-family: sans-serif;
@@ -55,4 +55,12 @@ a:hover, a:active {
 
 th {
   text-align: right;
+}
+
+circle.hidden {
+  opacity: 0;
+}
+
+.legend .hidden {
+  opacity: 0.5;
 }
