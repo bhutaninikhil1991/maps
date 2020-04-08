@@ -27,8 +27,8 @@
     <svg id="legend-svg" style="position: absolute;"></svg>
 
     <figcaption>
-      Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/data" target="_blank">SF 311 Cases</a> (<a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h" target="_blank">Neighborhoods</a>, <a
-        href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Streets-Active-and-Retired/3psu-pn9h" target="_blank">Streets</a>)
+      Source: <a href="https://data.sfgov.org/City-Infrastructure/311-Cases/vw6y-z8j6/data" target="_blank">SF 311 Cases</a> (<a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Analysis-Neighborhoods/p5b7-5n3h"
+        target="_blank">Neighborhoods</a>, <a href="https://data.sfgov.org/Geographic-Locations-and-Boundaries/Streets-Active-and-Retired/3psu-pn9h" target="_blank">Streets</a>)
     </figcaption>
   </figure>
 
@@ -75,10 +75,13 @@
     };
 
 
-    svg.call(d3.zoom().extent([[0, 0], [960, 600]])
+    svg.call(d3.zoom().extent([
+        [0, 0],
+        [960, 600]
+      ])
       .scaleExtent([1, 8]).on("zoom", function() {
-      svg.attr("transform", d3.event.transform)
-    }))
+        svg.attr("transform", d3.event.transform)
+      }))
 
     // setup tooltip (shows neighborhood name)
     const tip = g.tooltip.append("text").attr("id", "tooltip");
@@ -216,6 +219,9 @@
       //.style('stroke', 'black');
 
       symbols.on("mouseover", function(d) {
+        if (d3.select(this).classed('hidden'))
+          return;
+
         d3.select(this).raise();
         d3.select(this).classed("active", true);
 
@@ -225,15 +231,11 @@
       <table border="0" cellspacing="0" cellpadding="2">
       <tbody>
         <tr>
-          <th>Incident:</th>
-          <td>${d.service_request_id}</td>
+          <th>Request Date:</th>
+          <td>${new Date(d.requested_datetime).toLocaleString()}</td>
         </tr>
         <tr>
-          <th>Date:</th>
-          <td>${new Date(d.requested_datetime).toDateString()}</td>
-        </tr>
-        <tr>
-          <th>Status:</th>
+          <th>Request Status:</th>
           <td>${d.status_description}</td>
         </tr>
         <tr>
@@ -249,7 +251,7 @@
           <td>${d.service_details}</td>
         </tr>
         <tr>
-          <th>Source:</th>
+          <th>Request Source:</th>
           <td>${d.source}</td>
         </tr>
       </tbody>
