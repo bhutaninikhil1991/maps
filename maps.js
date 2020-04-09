@@ -1,7 +1,7 @@
 const width = 960;
 const height = 600;
 const urls = {
-  basemap: "https://data.sfgov.org/resource/xfcw-9evu.geojson",
+  basemap: "https://data.sfgov.org/resource/6ia5-2f8k.geojson",
   streets: "https://data.sfgov.org/resource/3psu-pn9h.geojson?$limit=20000",
   cases: "https://data.sfgov.org/resource/vw6y-z8j6.json"
 };
