@@ -401,10 +401,6 @@ function showLabel(d) {
       <td class="text">${new Date(d.requested_datetime).toLocaleString()}</td>
     </tr>
     <tr>
-      <th>Request Status:</th>
-      <td class="text">${d.status_description}</td>
-    </tr>
-    <tr>
       <th>Neighborhood:</th>
       <td class="text">${d.neighborhoods_sffind_boundaries}</td>
     </tr>
