@@ -8,8 +8,8 @@ const urls = {
 // const radiusStep = 0.1,
 //   nodeRadius = 12; // Max radius if node is free of collision
 // calculate date range
-const end = d3.timeDay(new Date(2020, 2, 31));
-const start = d3.timeDay(new Date(2020, 2, 1));
+const end = d3.timeDay(new Date(2020, 1, 29));
+const start = d3.timeDay(new Date(2020, 1, 1));
 const format = d3.timeFormat("%Y-%m-%dT%H:%M:%S");
 console.log(format(start), format(end));
 
@@ -18,8 +18,8 @@ var div = d3.select("body #d3ImplementationSection .container").append("div")
   .style("opacity", 0);
 
 // add parameters to arrests url
-urls.cases += "?$where=starts_with(service_name, 'Street and Sidewalk Cleaning')";
-urls.cases += " AND starts_with(status_description, 'Open')";
+urls.cases += "?$where=starts_with(service_name, 'Residential Building Request')";
+//urls.cases += " AND starts_with(status_description, 'Open')";
 urls.cases += " AND requested_datetime between '" + format(start) + "'";
 urls.cases += " and '" + format(end) + "'";
 
@@ -399,6 +399,10 @@ function showLabel(d) {
     <tr>
       <th>Request Date:</th>
       <td class="text">${new Date(d.requested_datetime).toLocaleString()}</td>
+    </tr>
+    <tr>
+      <th>Request Status:</th>
+      <td>${d.status_description}</td>
     </tr>
     <tr>
       <th>Neighborhood:</th>

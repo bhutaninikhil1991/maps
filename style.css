@@ -1,5 +1,5 @@
 body {
-  background-color: bisque;
+  background-color: white;
   text-align: center;
 
   font-family: sans-serif;
@@ -50,7 +50,7 @@ path.street {
 }
 
 circle.symbol {
-  fill-opacity: 0.7;
+  fill-opacity: 1;
 
   stroke: white;
   stroke-width: 1px;
